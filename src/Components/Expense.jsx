@@ -1,8 +1,10 @@
 import { Box, Button, ButtonGroup, Text } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { deleteExpense } from "../features/ExpenceSlice";
+import EditExpense from "./EditExpense";
 
 const Expense = ({ title, amount, category, timeStamp, id }) => {
+  let expense = {title, amount, category, timeStamp, id};
   const dispatch = useDispatch();
 
   return (
@@ -35,8 +37,10 @@ const Expense = ({ title, amount, category, timeStamp, id }) => {
         </Text>
       </Text>
       <ButtonGroup mt={3}>
-        <Button>Edit</Button>
-        <Button onClick={() => dispatch(deleteExpense(id))}>Delete</Button>
+        <EditExpense expense={expense}/>
+        <Button onClick={() => dispatch(deleteExpense(id))}>
+          Delete
+        </Button>
       </ButtonGroup>
     </Box>
   );

@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export const expenseSlice = createSlice({
-  name: "expence",
+  name: "expense",
   initialState,
   reducers: {
     addExpense: (state, action) => {
@@ -18,9 +18,18 @@ export const expenseSlice = createSlice({
         }
       });
     },
+
+    editExpense: (state, action) => {
+      state.expenses = state.expenses.map((expense) => {
+        if (expense.id === action.payload.id) {
+          return action.payload.updatedExpense;
+        }
+        return expense;
+      });
+    },
   },
 });
 
-export const { addExpense, deleteExpense } = expenseSlice.actions;
+export const { addExpense, deleteExpense, editExpense } = expenseSlice.actions;
 
 export default expenseSlice.reducer;
